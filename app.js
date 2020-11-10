@@ -34,6 +34,25 @@ res.send(err);
     });
 });
 
+app.post("/articles", function(req, res){
+
+  // Using Postman to send post request to our server with out any frontend or web Form.
+  
+  // console.log(req.body.title);
+  // console.log(req.body.content);
+const newArticle = new Article ({
+  title:req.body.title,
+  content:req.body.content
+});
+ newArticle.save(function(err){
+  if (!err){
+    res.send("Post request sent succesfully");
+  }else{
+    res.send("err");
+  }
+});
+});
+
 app.listen(3000, function() {
   console.log("Server started on port 3000");
 });
