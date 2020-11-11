@@ -18,23 +18,24 @@ const articleSchema = {
     content: String
 }
 const Article = mongoose.model("Article", articleSchema);
-app.get("/articles", function(req, res){
-    Article.find(function(err, foundArticles){
 
-        // To log in the termial
+app.route("/articles")
+.get( function(req, res){
+  Article.find(function(err, foundArticles){
+
+      // To log in the termial
 // console.log(foundArticles);
 
 // To send back to the client.
 // res.send(foundArticles);
 if (!err){
-    res.send(foundArticles);
+  res.send(foundArticles);
 }else {
 res.send(err);
 }
-    });
-});
-
-app.post("/articles", function(req, res){
+  });
+})
+.post(function(req, res){
 
   // Using Postman to send post request to our server with out any frontend or web Form.
   
@@ -51,17 +52,16 @@ const newArticle = new Article ({
     res.send("err");
   }
 });
-});
-
-app.delete("/articles", function(req, res){
-Article.deleteMany(function(err){
-  if (!err){
-    res.send("Succesfull");
-  }else{
-    res.send(err);
-  }
-});
-});
+})
+.delete(function(req, res){
+  Article.deleteMany(function(err){
+    if (!err){
+      res.send("Succesfull");
+    }else{
+      res.send(err);
+    }
+  });
+  });
 
 app.listen(3000, function() {
   console.log("Server started on port 3000");
